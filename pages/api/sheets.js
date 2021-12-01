@@ -2,8 +2,8 @@ import {google} from "googleapis"
 
 async function handler (req, res) {
     if (req.method === "POST"){
-    		const {name, message} = req.body;
-			console.log(name, message);
+    		const {nom, prenom, tel, cp, adresse, ville, numero} = req.body;
+			console.log(nom, prenom, tel, cp, adresse, ville, numero);
 
 			const auth = new google.auth.GoogleAuth({
 				credentials: {
@@ -28,7 +28,7 @@ async function handler (req, res) {
 				range: 'Sheet1!A2:G',
 				valueInputOption: 'USER_ENTERED',
 				requestBody: {
-				  values: [[name, message]],
+				  values: [[nom, prenom, tel, cp, adresse, ville, numero]],
 				},
 			  });
 		  
