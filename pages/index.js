@@ -6,8 +6,8 @@ import { useForm } from 'react-hook-form';
 const Input = ({ label, id, register, required }) => (
   <>
     <div className="inputfield">
-      <label>{label}</label>
-      <input id={id} placeholder={label} {...register(id, { required })} />
+      <label className="label">{label}</label>
+      <input className="input" id={id} placeholder={label} {...register(id, { required })} />
     </div>
 
   </>
@@ -29,22 +29,29 @@ export default function Home() {
   }
 
   return (
-    <div className="container">
-      <h1 fontSize="2xl" fontWeight="bold">
-        Your response matters!
-      </h1>
+    <div className="bg-gray-200">
+      <div className="container max-w-screen-md flex flex-col justify-center align-middle px-8  bg-neutral shadow-2xl gap-8">
+        <h1 className="p-8 text-2xl">
+          Horlogerie Francophone
+        </h1>
+        <form className="formulaire container form-control justify-center p-4 max-w-screen-sm " id="form" onSubmit={handleSubmit(submitHandler)}>
+          <h3 className="mt-8">Votre nom</h3>
+          <Input label="Nom" id="nom" register={register} required />
+          <Input label="Prénom" id="prenom" register={register} required />
+          <h3 className="mt-8">Coordonnées</h3>
+          <Input label="Téléphone" id="tel" register={register} required />
+          <Input label="Code postal" id="cp" register={register} required />
+          <Input label="Adresse" id="adresse" register={register} required />
+          <Input label="Ville" id="ville" register={register} required />
+          <h3 className="mt-8">Choisissez un numéro</h3>
+          <div id="numero-div" className="flex items-end gap-8 ">
+            <Input className="max-w-5xl" label="Numéro" id="numero" register={register} required />
+            <button className="btn btn-primary">🎲</button>
+          </div>
 
-      <form className="formulaire" onSubmit={handleSubmit(submitHandler)}>
-        <Input label="Nom" id="nom" register={register} required />
-        <Input label="Prénom" id="prenom" register={register} required />
-        <Input label="Téléphone" id="tel" register={register} required />
-        <Input label="Code postal" id="cp" register={register} required />
-        <Input label="Adresse" id="adresse" register={register} required />
-        <Input label="Ville" id="ville" register={register} required />
-        <Input label="Numéro" id="numero" register={register} required />
-
-        <button type="submit">Submit!</button>
-      </form>
+          <button form="form" className="btn btn-primary p-4 mt-8" type="submit">Submit!</button>
+        </form>
+      </div>
     </div>
   )
 }
