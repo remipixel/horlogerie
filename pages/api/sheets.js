@@ -10,9 +10,7 @@ async function handler(req, res) {
 
 	//Instance de Google Sheets API
 	const sheets = google.sheets({ version: 'v4', auth: client })
-
-
-	const spreadsheetId = '1Raga3yqTS2ozXy2ezzpyRQblnVzK0BIJF_7u4eNPYRA'
+	const spreadsheetId = process.env.SPREADSHEET_ID
 
 	if (req.method === "POST") {
 
