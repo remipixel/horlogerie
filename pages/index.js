@@ -80,7 +80,7 @@ export default function Home() {
             <label className="label">Téléphone</label>
             <input className="input" type="tel" id="tel" placeholder="Entrez votre numéro de téléphone" {...register("tel", { required: true, pattern: /^[\d]+$/i, minLength: 10, maxLength: 10 })} />
           </div>
-          {errors.tel && <p>Indiquez votre numéro de téléphone à 10 chiffres</p>}
+          {errors.tel && <p className="text-alert">Indiquez votre numéro de téléphone</p>}
 
 
           <div className="flex flex-col gap-2">
@@ -95,7 +95,7 @@ export default function Home() {
           <div className="md:flex gap-8">
             <div className="flex flex-col max-w-5xl gap-2">
               <label className="label">Code postal</label>
-              <input className="input" type="number" id="cp" placeholder="Entrez votre code postal" {...register("cp", { required: true, pattern: /^[\d]+$/i, minLength: 1, maxLength: 10 })} />
+              <input className="input" type="text" id="cp" placeholder="Entrez votre code postal" {...register("cp", { required: true, pattern: /^[\d]+$/i, minLength: 1, maxLength: 10 })} />
               {errors.cp && <p>Indiquez votre code postal</p>}
             </div>
             <div className="flex flex-grow flex-col gap-2">
