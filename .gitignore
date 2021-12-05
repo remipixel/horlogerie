@@ -34,3 +34,4 @@ yarn-error.log*
 .vercel
 credentials.json
 env.local
+pages/async function handler(req, res) {.js

@@ -78,7 +78,7 @@ export default function Home() {
 
           <div className="flex flex-col gap-2">
             <label className="label">Téléphone</label>
-            <input className="input" type="tel" id="tel" placeholder="Entrez votre numéro de téléphone" {...register("tel", { required: true, pattern: /^[\d]+$/i, minLength: 10, maxLength: 10 })} />
+            <input className="input" type="tel" id="tel" placeholder="Entrez votre numéro de téléphone" {...register("tel", { required: true, pattern:/^[+\d]+$/i, minLength: 1, maxLength: 20 })} />
           </div>
           {errors.tel && <p className="text-alert">Indiquez votre numéro de téléphone</p>}
 
