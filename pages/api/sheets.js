@@ -1,8 +1,10 @@
 import { google } from "googleapis"
+import credentials from '/credentials'
+
 
 async function handler(req, res) {
 	const auth = new google.auth.GoogleAuth({
-		keyFile: './credentials.json',
+		credentials: credentials,
 		scopes: 'https://www.googleapis.com/auth/spreadsheets',
 	})
 
@@ -38,12 +40,14 @@ async function handler(req, res) {
 		const getRows = await sheets.spreadsheets.values.get({
 			auth, spreadsheetId,
 			range: "Sheet1!A2:G",
-			valueRenderOption: "UNFORMATTED_VALUE"
+			valueRenderOption: "FORMATTED_VALUE"
 		})
 
-		return (
-			res.json(getRows.data)
-		)
+		const arr = getRows.data.values
+		const newArr = arr
+
+		return res.json(newArr)
+
 
 	} return res.status(200).json({ message: 'Hey!' })
 }

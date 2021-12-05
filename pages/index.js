@@ -19,19 +19,18 @@ export default function Home() {
     reset();
   }
 
-  async function checkNumbers(data) {
-    const headers = new Headers();
-    const init = { method : 'GET', headers, mode : 'cors', cache:'default' }
-    const req = new Request('/api/sheets', init)
+  async function checkNumber() {
+    const recupererTableau = await fetch("/api/sheets", {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
 
-    await fetch(req, init)
-    .then(function(res) {
-      return res.stringify()
-    })
-    console.log(storedNumbers);
+    
+
   }
 
-  console.log(checkNumbers)
 
   function generateNumber(min, max) {
     min = Math.ceil(min);
@@ -42,10 +41,9 @@ export default function Home() {
   const autoNumber = generateNumber(0, 9999)
 
   function fillNumberInput() {
-    let n = generateNumber(0,9999)
-    document.getElementById("numero").value=n;  
+    let n = generateNumber(0, 9999)
+    document.getElementById("numero").value = n;
   }
-
 
   return (
     <div className="bg-gray-200">
@@ -65,13 +63,13 @@ export default function Home() {
 
           <div className="flex flex-col gap-2">
             <label className="label">Nom</label>
-            <input className="input" defaultValue="Test" type="text" id="nom" placeholder="Entrez votre nom" {...register("nom", { required: true, pattern: /^[a-zàâçéèêëîïôûùüÿñæœ .-]*$/i })} />
+            <input className="input" type="text" id="nom" placeholder="Entrez votre nom" {...register("nom", { required: true, pattern: /^[a-zàâçéèêëîïôûùüÿñæœ .-]*$/i })} />
           </div>
           {errors.nom && <p>Indiquez votre nom</p>}
 
           <div className="flex flex-col gap-2">
             <label className="label">Prénom</label>
-            <input className="input" defaultValue="Test" type="text" id="prenom" placeholder="Entrez votre prénom" {...register("prenom", { required: true, pattern: /^[a-zàâçéèêëîïôûùüÿñæœ .-]*$/i })} />
+            <input className="input" type="text" id="prenom" placeholder="Entrez votre prénom" {...register("prenom", { required: true, pattern: /^[a-zàâçéèêëîïôûùüÿñæœ .-]*$/i })} />
           </div>
           {errors.prenom && <p>Indiquez votre prénom</p>}
 
@@ -80,29 +78,29 @@ export default function Home() {
 
           <div className="flex flex-col gap-2">
             <label className="label">Téléphone</label>
-            <input className="input" defaultValue="0123456789" type="tel" id="tel" placeholder="Entrez votre numéro de téléphone" {...register("tel", { required: true, pattern: /^[\d]+$/i, minLength: 10, maxLength: 10 })} />
+            <input className="input" type="tel" id="tel" placeholder="Entrez votre numéro de téléphone" {...register("tel", { required: true, pattern: /^[\d]+$/i, minLength: 10, maxLength: 10 })} />
           </div>
           {errors.tel && <p>Indiquez votre numéro de téléphone à 10 chiffres</p>}
 
 
           <div className="flex flex-col gap-2">
             <label className="label">Adresse</label>
-            <input className="input" defaultValue="Test" type="text" id="adresse" placeholder="Entrez votre adresse postale" {...register("adresse", { required: true })} />
+            <input className="input" type="text" id="adresse" placeholder="Entrez votre adresse postale" {...register("adresse", { required: true })} />
           </div>
           {errors.adresse && <p>Indiquez votre adresse</p>}
 
 
 
 
-          <div className="flex gap-8">
+          <div className="md:flex gap-8">
             <div className="flex flex-col max-w-5xl gap-2">
               <label className="label">Code postal</label>
-              <input className="input" defaultValue="12345" type="number" id="cp" placeholder="Entrez votre code postal" {...register("cp", { required: true, pattern: /^[\d]+$/i, minLength: 1, maxLength: 10 })} />
+              <input className="input" type="number" id="cp" placeholder="Entrez votre code postal" {...register("cp", { required: true, pattern: /^[\d]+$/i, minLength: 1, maxLength: 10 })} />
               {errors.cp && <p>Indiquez votre code postal</p>}
             </div>
             <div className="flex flex-grow flex-col gap-2">
               <label className="label">Ville</label>
-              <input className="input" defaultValue="Test" type="text" id="ville" placeholder="Entrez votre ville" {...register("ville", { required: true })} />
+              <input className="input" type="text" id="ville" placeholder="Entrez votre ville" {...register("ville", { required: true })} />
               {errors.ville && <p>Indiquez votre ville</p>}
             </div>
 
