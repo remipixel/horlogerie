@@ -19,6 +19,18 @@ export default function Home() {
     reset();
   }
 
+
+
+  const fetcher = fetch('/api/sheets', {
+    method: 'GET',
+  });
+  
+
+  
+
+
+
+
   async function checkNumber() {
     const recupererTableau = await fetch("/api/sheets", {
       method: 'GET',
@@ -61,31 +73,37 @@ export default function Home() {
 
           <div className="flex flex-col gap-2">
             <label className="label">Nom</label>
-            <input className="input" type="text" id="nom" placeholder="Entrez votre nom" {...register("nom", { required: true, pattern: /^[a-zàâçéèêëîïôûùüÿñæœ .-]*$/i })} />
+            <input className="input" type="text" id="nom" placeholder="Entrez votre nom" {...register("firstName", { required: true, pattern: /^[a-zàâçéèêëîïôûùüÿñæœ .-]*$/i })} />
           </div>
           {errors.nom && <p>Indiquez votre nom</p>}
 
           <div className="flex flex-col gap-2">
             <label className="label">Prénom</label>
-            <input className="input" type="text" id="prenom" placeholder="Entrez votre prénom" {...register("prenom", { required: true, pattern: /^[a-zàâçéèêëîïôûùüÿñæœ .-]*$/i })} />
+            <input className="input" type="text" id="prenom" placeholder="Entrez votre prénom" {...register("lastName", { required: true, pattern: /^[a-zàâçéèêëîïôûùüÿñæœ .-]*$/i })} />
           </div>
           {errors.prenom && <p>Indiquez votre prénom</p>}
+
+          <div className="flex flex-col gap-2">
+            <label className="label">Facebook</label>
+            <input className="input" type="text" id="facebookId" placeholder="Entrez votre nom Facebook" {...register("facebookId", { required: true, pattern: /^[a-zàâçéèêëîïôûùüÿñæœ .-]*$/i })} />
+          </div>
+          {errors.prenom && <p>Indiquez votre pseudo Facebook</p>}
 
           <h3 className="mt-8 text-xl">Vos coordonnées</h3>
 
 
           <div className="flex flex-col gap-2">
             <label className="label">Téléphone</label>
-            <input className="input" type="tel" id="tel" placeholder="Entrez votre numéro de téléphone" {...register("tel", { required: true, pattern: /^[+\d]+$/i, minLength: 1, maxLength: 20 })} />
+            <input className="input" type="tel" id="tel" placeholder="Entrez votre numéro de téléphone" {...register("phone", { required: true, pattern: /^[+\d]+$/i, minLength: 1, maxLength: 20 })} />
           </div>
           {errors.tel && <p className="text-alert">Indiquez votre numéro de téléphone</p>}
 
 
           <div className="flex flex-col gap-2">
-            <label className="label">Adresse</label>
-            <input className="input" type="text" id="adresse" placeholder="Entrez votre adresse postale" {...register("adresse", { required: true })} />
+            <label className="label">Adresse postale</label>
+            <input className="input" type="text" id="adresse" placeholder="Entrez votre adresse postale" {...register("address", { required: true, pattern: /^[a-zàâçéèêëîïôûùüÿñæœ,\- .\d-]*$/i })} />
           </div>
-          {errors.adresse && <p>Indiquez votre adresse</p>}
+          {errors.adresse && <p>Indiquez votre adresse postale</p>}
 
 
 
@@ -112,7 +130,8 @@ export default function Home() {
             <button id="randomButton" className="btn btn-primary" type="button" onClick={fillNumberInput} >🎲</button>
           </div>
 
-          <button form="form" id="submit" className="btn btn-primary p-4 mt-8" type="submit">Participer au jeu 🎉</button>
+          <button form="form" id="submit" className="btn btn-primary p-4 mt-8" type="submit" >Participer au jeu 🎉</button>
+          {handleSubmit.submit && <h1>Merci d&rsquo;avoir participé !</h1>}
           {errors.submit && <h1>Erreur : Vous avez déjà participé !</h1>}
 
 
