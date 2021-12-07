@@ -32,6 +32,4 @@ yarn-error.log*
 
 # vercel
 .vercel
-credentials.json
 env.local
-pages/async function handler(req, res) {.js

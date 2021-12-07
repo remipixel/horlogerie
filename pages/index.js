@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { useForm } from 'react-hook-form';
 import Image from 'next/image'
 import logo from '../public/logo.svg'
@@ -18,19 +18,6 @@ export default function Home() {
     console.log(data);
     reset();
   }
-
-  async function checkNumber() {
-    const recupererTableau = await fetch("/api/sheets", {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-
-    
-
-  }
-
 
   function generateNumber(min, max) {
     min = Math.ceil(min);
@@ -78,7 +65,7 @@ export default function Home() {
 
           <div className="flex flex-col gap-2">
             <label className="label">Téléphone</label>
-            <input className="input" type="tel" id="tel" placeholder="Entrez votre numéro de téléphone" {...register("tel", { required: true, pattern:/^[+\d]+$/i, minLength: 1, maxLength: 20 })} />
+            <input className="input" type="tel" id="tel" placeholder="Entrez votre numéro de téléphone" {...register("tel", { required: true, pattern: /^[+\d]+$/i, minLength: 1, maxLength: 20 })} />
           </div>
           {errors.tel && <p className="text-alert">Indiquez votre numéro de téléphone</p>}
 
@@ -109,13 +96,17 @@ export default function Home() {
           <h3 className="mt-8 text-xl">Choisissez un numéro</h3>
 
           <div id="numero-div" className="flex items-end gap-8 ">
-            <input className="input max-w-5xl" defaultValue={autoNumber} type="number" id="numero" placeholder="Choisissez un numéro" {...register("numero", { required: true, min: 0, max: 9999 })} />
+            <input className="input max-w-5xl" type="number" id="numero" placeholder="Choisissez un numéro" {...register("numero", { required: true, min: 0, max: 9999 })} />
             {errors.numero && <p>Choisissez un autre numéro entre 0 et 9999</p>}
             <button id="randomButton" className="btn btn-primary" type="button" onClick={fillNumberInput} >🎲</button>
           </div>
 
-          <button form="form" className="btn btn-primary p-4 mt-8" type="submit">Participer au jeu 🎉</button>
+          <button form="form" id="submit" className="btn btn-primary p-4 mt-8" type="submit">Participer au jeu 🎉</button>
+          {errors.submit && <h1>Erreur : Vous avez déjà participé !</h1>}
+
+
         </form>
+
       </div >
     </div >
   )
