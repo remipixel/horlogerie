@@ -19,6 +19,17 @@ export default function Home() {
     reset();
   }
 
+  async function checkNumber() {
+    const recupererTableau = await fetch("/api/sheets", {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+
+  }
+
   function generateNumber(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -106,7 +117,6 @@ export default function Home() {
 
 
         </form>
-
       </div >
     </div >
   )
